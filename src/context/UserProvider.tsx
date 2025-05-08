@@ -2,21 +2,29 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type { IInputs } from "../Inputs";
 
 interface IContext {
-  newUser: {};
+  newUser: IInputs;
   setNewUser: React.Dispatch<React.SetStateAction<IInputs>>;
 }
 
 const userContext = createContext<IContext>({
-  newUser: {},
+  newUser: {
+    name: "",
+    email: "",
+    password: "",
+  },
   setNewUser: () => {},
 });
 
 export default function UserProvider({ children }: { children: ReactNode }) {
-  const [newUser, setNewUser] = useState<IInputs>({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const storedUser = localStorage.getItem("user");
+  const initialUser = storedUser
+    ? JSON.parse(storedUser)
+    : {
+        name: "",
+        email: "",
+        password: "",
+      };
+  const [newUser, setNewUser] = useState<IInputs>(initialUser);
   return (
     <>
       <userContext.Provider

@@ -3,9 +3,10 @@ import type { IInputs } from "../Inputs";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import eyeIcon from "../../public/assets/images/icon-show-password.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import eyeOn from "../../public/assets/images/icon-hide-password.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserProvider";
 const schema: yup.ObjectSchema<IInputs> = yup.object({
   name: yup.string().required("name is required"),
   email: yup.string().email("Invalid email form").required("email is required"),
@@ -16,14 +17,14 @@ export default function Signup() {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm<IInputs>({
     resolver: yupResolver(schema),
   });
+  const navigate = useNavigate();
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeIcon);
-
+  const { setNewUser } = useUser();
   const showPassword = () => {
     if (type == "password") {
       setIcon(eyeOn);
@@ -33,12 +34,17 @@ export default function Signup() {
       setType("password");
     }
   };
-
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setNewUser(JSON.parse(storedUser));
+    }
+  }, []);
   const onSubmit: SubmitHandler<IInputs> = (data) => {
     event?.preventDefault();
-    console.log("Form submitted:", data);
     window.scrollTo(0, 0);
     localStorage.setItem("user", JSON.stringify(data));
+    navigate("/login");
   };
 
   return (

@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Layout from "./Layout/Layout";
 import Login from "./pages/Login";
 import UserProvider from "./context/UserProvider";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         element: <Login />,
       },
     ],
+  },
+  {
+    path: "/home",
+    element: <Home />,
   },
 ]);
 
