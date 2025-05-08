@@ -51,7 +51,7 @@ export default function Signup() {
     <div className="py-[115.62px] px-[16px] flex justify-center">
       <div className="container px-[20px] py-[24px] w-[303px] rounded-[12px] bg-white">
         <h1 className="text-[#201F24] text-[32px] font-bold leading-[120%]">
-          Sing Up
+          Sign Up
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="name flex flex-col mt-[32px] gap-[4px]">

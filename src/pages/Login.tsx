@@ -108,7 +108,7 @@ export default function Login() {
               to={"/signup"}
               className="underline text-[#201F24] text-[14px] font-bold leading-[150%]"
             >
-              Sing Up
+              Sign Up
             </Link>
           </p>
         </div>
