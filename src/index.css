@@ -3,6 +3,8 @@
 @theme {
   --color-headercolor: #201f24;
   --color-signup: #201f24;
+  --color-totalsaved: #f8f4f0;
+  --color-divider: #f2f2f2;
 }
 
 body {
