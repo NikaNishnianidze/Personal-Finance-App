@@ -11,13 +11,27 @@ const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
 });
-
+const filterItems = [
+  "All Transactions",
+  "Entertainment",
+  "Bills",
+  "Groceries",
+  "Dining Out",
+  "Transportation",
+  "Personal Care",
+  "Education",
+  "Lifestyle",
+  "Shopping",
+  "General",
+];
 export default function Transactions() {
   const { finance, setFinance } = useUser();
   const [currentPage, setCurrentPage] = useState<number>(2);
   const [search, setSearch] = useState<string>("");
   const [sort, setSort] = useState<boolean>(false);
   const [sortIndex, setSortIndex] = useState<number | null>(null);
+  const [filter, setFilter] = useState<boolean>(false);
+  const [filterIndex, setFilterIndex] = useState<number | null>(null);
   const transactionsPerPage = 9;
   useEffect(() => {
     setCurrentPage(1);
@@ -29,7 +43,12 @@ export default function Transactions() {
       const matchesSearch = item.name
         .toLowerCase()
         .includes(search.toLowerCase());
-      return matchesSearch;
+      const matchesCategory =
+        filterIndex === 0 || filterIndex === null
+          ? true
+          : item.category === filterItems[filterIndex];
+
+      return matchesSearch && matchesCategory;
     })
     .sort((a, b) => {
       switch (sortIndex) {
@@ -74,6 +93,10 @@ export default function Transactions() {
     setSortIndex(i);
     setSort(false);
   };
+  const handleFilter = (i: number) => {
+    setFilterIndex(i);
+    setFilter(false);
+  };
 
   return (
     <div className="flex flex-col items-center pt-[33px] px-[16px]">
@@ -101,6 +124,25 @@ export default function Transactions() {
               </div>
             </div>
           )}
+          {filter && (
+            <div className="absolute top-15 right-0 w-[177px] py-[12px] px-[20px] bg-white shadow-sort rounded-[8px]">
+              <p className="text-[#696868] font-normal text-[14px]">Category</p>
+              <div className="filter max-h-[200px] overflow-y-auto flex flex-col gap-[25px] mt-[25px]">
+                {filterItems.map((item, i) => {
+                  return (
+                    <p
+                      style={{ fontWeight: filterIndex == i ? 700 : 400 }}
+                      onClick={() => handleFilter(i)}
+                      key={i}
+                      className="text-[14px] font-normal text-[#201F24]"
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           <div className="search flex justify-between w-[215px] px-[15px] rounded-[8px] border-[#98908B] border-[1px]">
             <input
               onChange={(e) => setSearch(e.target.value)}
@@ -113,7 +155,7 @@ export default function Transactions() {
           <div onClick={() => setSort(!sort)} className="sort">
             <img src={sortIcon} alt="sort icon" />
           </div>
-          <div className="categoryfilter">
+          <div onClick={() => setFilter(!filter)} className="categoryfilter">
             <img src={filterIcon} alt="filter icon" />
           </div>
         </div>
