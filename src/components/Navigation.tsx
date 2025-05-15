@@ -96,16 +96,44 @@ export default function Navigation() {
           />
         </div>
         <div
+          style={{
+            backgroundColor: currentPath == "/home/pots" ? "#F8F4F0" : "",
+            borderBottom:
+              currentPath == "/home/pots" ? "4px solid #277C78" : "",
+          }}
           onClick={goPots}
           className="pots w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
         >
-          <img src={pots} alt="pots" />
+          <img
+            src={pots}
+            alt="pots"
+            style={{
+              filter:
+                currentPath === "/home/pots"
+                  ? "invert(32%) sepia(96%) saturate(500%) hue-rotate(120deg) brightness(90%) contrast(85%)"
+                  : "none",
+            }}
+          />
         </div>
         <div
+          style={{
+            backgroundColor: currentPath == "/home/bills" ? "#F8F4F0" : "",
+            borderBottom:
+              currentPath == "/home/bills" ? "4px solid #277C78" : "",
+          }}
           onClick={goBills}
           className="bills w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
         >
-          <img src={bills} alt="billss" />
+          <img
+            src={bills}
+            alt="bills"
+            style={{
+              filter:
+                currentPath === "/home/bills"
+                  ? "invert(32%) sepia(96%) saturate(500%) hue-rotate(120deg) brightness(90%) contrast(85%)"
+                  : "none",
+            }}
+          />
         </div>
       </header>
     </>

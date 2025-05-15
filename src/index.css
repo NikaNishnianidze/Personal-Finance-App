@@ -5,6 +5,8 @@
   --color-signup: #201f24;
   --color-totalsaved: #f8f4f0;
   --color-divider: #f2f2f2;
+
+  --shadow-sort: 0px 4px 24px 0px rgba(0, 0, 0, 0.25);
 }
 
 body {

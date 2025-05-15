@@ -16,18 +16,39 @@ export default function Transactions() {
   const { finance, setFinance } = useUser();
   const [currentPage, setCurrentPage] = useState<number>(2);
   const [search, setSearch] = useState<string>("");
+  const [sort, setSort] = useState<boolean>(false);
+  const [sortIndex, setSortIndex] = useState<number | null>(null);
   const transactionsPerPage = 9;
   useEffect(() => {
     setCurrentPage(1);
   }, [search]);
   const startIndex = (currentPage - 1) * transactionsPerPage;
   const endIndex = startIndex + transactionsPerPage;
-  const filteredTransactions = finance.transactions.filter((item) => {
-    const matchesSearch = item.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
-    return matchesSearch;
-  });
+  const filteredTransactions = finance.transactions
+    .filter((item) => {
+      const matchesSearch = item.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      return matchesSearch;
+    })
+    .sort((a, b) => {
+      switch (sortIndex) {
+        case 0:
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        case 1:
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        case 2:
+          return a.name.localeCompare(b.name);
+        case 3:
+          return b.name.localeCompare(a.name);
+        case 4:
+          return b.amount - a.amount;
+        case 5:
+          return a.amount - b.amount;
+        default:
+          return 0;
+      }
+    });
   const currentTransactions = filteredTransactions.slice(startIndex, endIndex);
 
   const totalPages = Math.ceil(
@@ -40,13 +61,46 @@ export default function Transactions() {
     }
   };
 
+  const sortItems = [
+    "Latest",
+    "Oldest",
+    "A to Z",
+    "Z to A",
+    "Highest",
+    "Lowest",
+  ];
+
+  const handleSort = (i: number) => {
+    setSortIndex(i);
+    setSort(false);
+  };
+
   return (
     <div className="flex flex-col items-center pt-[33px] px-[16px]">
       <p className="text-[32px] w-[343px] text-[#201F24] font-bold leading-[120%]">
         Transactions
       </p>
       <div className="main-container py-[24px] px-[20px] bg-white rounded-[12px] mt-[41px] w-[343px] mb-[60px]">
-        <div className="filters flex items-center gap-[24px]">
+        <div className="filters flex items-center gap-[24px] relative">
+          {sort && (
+            <div className="absolute w-[114px] bg-white py-[12px] top-14 right-0 flex flex-col pl-[20px] rounded-[8px] shadow-sort">
+              <p className="text-[#696868] text-[14px] font-normal ">Sort by</p>
+              <div className="sort mt-[25px] flex flex-col gap-[25px]">
+                {sortItems.map((item, i) => {
+                  return (
+                    <p
+                      onClick={() => handleSort(i)}
+                      key={i}
+                      style={{ fontWeight: sortIndex == i ? 700 : 400 }}
+                      className="text-[14px] text-[#201F24] font-normal"
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           <div className="search flex justify-between w-[215px] px-[15px] rounded-[8px] border-[#98908B] border-[1px]">
             <input
               onChange={(e) => setSearch(e.target.value)}
@@ -56,7 +110,7 @@ export default function Transactions() {
             />
             <img src={searchIcon} alt="search icon" />
           </div>
-          <div className="sort">
+          <div onClick={() => setSort(!sort)} className="sort">
             <img src={sortIcon} alt="sort icon" />
           </div>
           <div className="categoryfilter">
