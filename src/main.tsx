@@ -9,6 +9,7 @@ import UserProvider from "./context/UserProvider";
 import Home from "./pages/Home";
 import NavigationLayout from "./Layout/NavigationLayout";
 import Transactions from "./pages/Transactions";
+import Budgets from "./pages/Budgets";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/home/transactions",
         element: <Transactions />,
+      },
+      {
+        path: "/home/budget",
+        element: <Budgets />,
       },
     ],
   },

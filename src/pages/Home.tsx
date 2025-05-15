@@ -74,7 +74,6 @@ export default function Home() {
     (acc, item) => acc + item.amount,
     0
   );
-  console.log(totalSpentBudget);
 
   const duesoonTotal = recurringDueSoon.reduce((sum, tx) => sum + tx.amount, 0);
   return (
