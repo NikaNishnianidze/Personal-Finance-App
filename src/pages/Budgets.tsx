@@ -1,6 +1,8 @@
 import { useUser } from "../context/UserProvider";
 import elipsis from "../../public/assets/images/icon-ellipsis.svg";
 import caretRight from "../../public/assets/images/icon-caret-right.svg";
+import { use, useState } from "react";
+import closeIcon from "../../public/assets/images/icon-close-modal.svg";
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
@@ -10,6 +12,10 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 
 export default function Budgets() {
   const { finance } = useUser();
+  const [addBudget, setAddBudget] = useState<boolean>(false);
+  const [category, setCategory] = useState<string>("Entertainment");
+  const [theme, setTheme] = useState<string>("green");
+  const [maximumSpent, setMaximumSpent] = useState<string>();
   const spentBudget = finance.transactions.filter((t) => {
     const d = new Date(t.date);
     return (
@@ -25,7 +31,7 @@ export default function Budgets() {
     0
   );
   const entertainment = finance.budgets.filter(
-    (item) => item.category == "Entertainment"
+    (item) => item.category == "entertainment"
   );
   const bills = finance.budgets.filter((item) => item.category == "Bills");
   const tranBills = finance.transactions.filter((t) => {
@@ -42,7 +48,7 @@ export default function Budgets() {
     const d = new Date(t.date);
     return t.category === "Dining Out" && d.getMonth() === 7;
   });
-  console.log(tranDining);
+
   const totalTranDining = 67;
 
   //personal care
@@ -69,10 +75,95 @@ export default function Budgets() {
     <div className="flex flex-col items-center py-[9px] px-[16px]">
       <div className="first-line flex items-center justify-between w-full">
         <p className="text-[32px] text-[#201F24] font-bold">Budgets</p>
-        <button className="w-[155px] rounded-[8px] text-white font-bold py-[16px] text-[14px] text-center bg-[#201F24]">
+        <button
+          onClick={() => setAddBudget(true)}
+          className="w-[155px] rounded-[8px] text-white font-bold py-[16px] text-[14px] text-center bg-[#201F24]"
+        >
           + Add New Budget
         </button>
       </div>
+      {addBudget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
+            <div className="newbudget flex items-center justify-between">
+              <p className="text-[20px] text-[#201F24] font-bold">
+                Add New Budget
+              </p>
+              <img
+                onClick={() => setAddBudget(false)}
+                src={closeIcon}
+                alt="close Icon"
+              />
+            </div>
+            <p className="mt-[24px] text-[14px] font-normal text-[#696868]">
+              Choose a category to set a spending budget. These categories can
+              help you monitor spending.
+            </p>
+            <div className="budget-category flex flex-col mt-[20px] gap-[4px]">
+              <p className="text-[12px] text-[#696868] font-bold">
+                Budget Category
+              </p>
+              <div className="relative w-full">
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full outline-none appearance-none p-2 pr-8 border border-gray-400 rounded-md bg-white text-black"
+                >
+                  <option value="entertainment">Entertainment</option>
+                  <option value="bills">Bills</option>
+                  <option value="groceries">Groceries</option>
+                  <option value="dining-out">Dining Out</option>
+                  <option value="transportation">Transportation</option>
+                  <option value="personal-care">Personal Care</option>
+                  <option value="education">Education</option>
+                </select>
+                <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+                  ▼
+                </div>
+              </div>
+            </div>
+            <div className="maximum-spent flex flex-col gap-[4px] mt-[16px]">
+              <p className="text-[12px] text-[#696868] font-bold">
+                Maximum Spent
+              </p>
+              <div className="d w-[295px] py-[12px] px-[20px] flex items-center gap-[12px] border-[1px] rounded-[8px] border-[#98908B]">
+                <p className="text-[14px] text-[#696868] font-bold">$</p>
+                <input
+                  type="text"
+                  onChange={(e) => setMaximumSpent(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="theme">
+              <div className="budget-category flex flex-col mt-[16px] gap-[4px]">
+                <p className="text-[12px] text-[#696868] font-bold">Theme</p>
+                <div className="relative w-full">
+                  <select
+                    value={theme}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full outline-none appearance-none p-2 pr-8 border border-gray-400 rounded-md bg-white text-black"
+                  >
+                    <option value="green">
+                      <div className="circle w-[16px] h-[16px] bg-[#277C78] rounded-full"></div>
+                      Green
+                    </option>
+                    <option value="bills">Bills</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="dining-out">Dining Out</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="personal-care">Personal Care</option>
+                    <option value="education">Education</option>
+                  </select>
+                  <div className="absolute top-1/2 left-2"></div>
+                  <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
+                    ▼
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="budgets-box w-[343px] mt-[41px] bg-white rounded-[12px] py-[24px] px-[20px]">
         <div className="center-budget-cirle flex justify-center">
           <div
@@ -213,7 +304,7 @@ export default function Budgets() {
                 </div>
                 {entertainmentSpent.map((item) => {
                   return (
-                    <>
+                    <div key={item.name}>
                       <div className="flex items-center justify-between mt-[20px] gap-[12px]">
                         <div className="category text-[12px] font-bold text-[#201F24] leading-[150%]">
                           {item.name}
@@ -236,7 +327,7 @@ export default function Budgets() {
                         </div>
                       </div>
                       <div className="divider w-[271px] mt-[12px] h-[1px] bg-[#696868]/15"></div>
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -306,9 +397,9 @@ export default function Budgets() {
                     <img src={caretRight} alt="caret icon" />
                   </div>
                 </div>
-                {tranBills.slice(0, 3).map((item) => {
+                {tranBills.slice(0, 3).map((item, i) => {
                   return (
-                    <>
+                    <div key={i}>
                       <div className="flex items-center justify-between mt-[20px] gap-[12px]">
                         <div className="category text-[12px] font-bold text-[#201F24] leading-[150%]">
                           {item.name}
@@ -331,7 +422,7 @@ export default function Budgets() {
                         </div>
                       </div>
                       <div className="divider w-[271px] mt-[12px] h-[1px] bg-[#696868]/15"></div>
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -406,9 +497,9 @@ export default function Budgets() {
                     <img src={caretRight} alt="caret icon" />
                   </div>
                 </div>
-                {tranDining.slice(0, 3).map((item) => {
+                {tranDining.slice(0, 3).map((item, i) => {
                   return (
-                    <>
+                    <div key={i}>
                       <div className="flex items-center justify-between mt-[20px] gap-[12px]">
                         <div className="category text-[12px] font-bold text-[#201F24] leading-[150%]">
                           {item.name}
@@ -431,7 +522,7 @@ export default function Budgets() {
                         </div>
                       </div>
                       <div className="divider w-[271px] mt-[12px] h-[1px] bg-[#696868]/15"></div>
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -447,7 +538,7 @@ export default function Budgets() {
                 <div className="category flex items-center gap-[16px]">
                   <div className="circle  w-[16px] h-[16px] rounded-full bg-[#626070]"></div>
                   <p className=" text-[20px] text-[#201F24] font-bold">
-                    Dining Out
+                    Holiday
                   </p>
                 </div>
                 <div className="dots">
@@ -506,9 +597,9 @@ export default function Budgets() {
                     <img src={caretRight} alt="caret icon" />
                   </div>
                 </div>
-                {tranCare.slice(0, 3).map((item) => {
+                {tranCare.slice(0, 3).map((item, i) => {
                   return (
-                    <>
+                    <div key={i}>
                       <div className="flex items-center justify-between mt-[20px] gap-[12px]">
                         <div className="category text-[12px] font-bold text-[#201F24] leading-[150%]">
                           {item.name}
@@ -531,7 +622,7 @@ export default function Budgets() {
                         </div>
                       </div>
                       <div className="divider w-[271px] mt-[12px] h-[1px] bg-[#696868]/15"></div>
-                    </>
+                    </div>
                   );
                 })}
               </div>

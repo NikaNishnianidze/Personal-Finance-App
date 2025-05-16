@@ -11,6 +11,7 @@ import NavigationLayout from "./Layout/NavigationLayout";
 import Transactions from "./pages/Transactions";
 import Budgets from "./pages/Budgets";
 import Pots from "./pages/Pots";
+import Bills from "./pages/Bills";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/home/pots",
         element: <Pots />,
+      },
+      {
+        path: "/home/bills",
+        element: <Bills />,
       },
     ],
   },
