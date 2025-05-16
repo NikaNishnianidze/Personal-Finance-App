@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import NavigationLayout from "./Layout/NavigationLayout";
 import Transactions from "./pages/Transactions";
 import Budgets from "./pages/Budgets";
+import Pots from "./pages/Pots";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/home/budget",
         element: <Budgets />,
+      },
+      {
+        path: "/home/pots",
+        element: <Pots />,
       },
     ],
   },

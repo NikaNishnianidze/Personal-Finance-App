@@ -11,7 +11,7 @@ export default function Navigation() {
   const location = useLocation();
   const currentPath = location.pathname;
   const { setActive } = useUser();
-  console.log(currentPath);
+
   const GoHome = () => {
     navigate("/home");
     setActive("/home");

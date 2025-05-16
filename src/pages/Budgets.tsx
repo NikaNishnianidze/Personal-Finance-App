@@ -163,7 +163,7 @@ export default function Budgets() {
               <p className="mt-[20px] text-[14px] font-normal text-[#696868]">
                 Maxium of ${item.maximum.toFixed(2)}
               </p>
-              <div className="progressline mb-20 mt-[16px] w-[303px] h-[32px] bg-[#F8F4F0] rounded-[4px] p-[4px]">
+              <div className="progressline mb-4 mt-[16px] w-[303px] h-[32px] bg-[#F8F4F0] rounded-[4px] p-[4px]">
                 <div
                   className={`line bg-[#277C78] h-full rounded-[4px]`}
                   style={{
