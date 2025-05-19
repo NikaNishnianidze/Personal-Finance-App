@@ -6,6 +6,7 @@ import eyeIcon from "../../public/assets/images/icon-show-password.svg";
 import { useEffect, useState } from "react";
 import eyeOn from "../../public/assets/images/icon-hide-password.svg";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../../public/assets/images/logo-large.svg";
 import { useUser } from "../context/UserProvider";
 const schema: yup.ObjectSchema<IInputs> = yup.object({
   name: yup.string().required("name is required"),
@@ -48,9 +49,21 @@ export default function Signup() {
   };
 
   return (
-    <div className="py-[115.62px] px-[16px] flex justify-center">
-      <div className="container px-[20px] py-[24px] w-[303px] rounded-[12px] bg-white">
-        <h1 className="text-[#201F24] text-[32px] font-bold leading-[120%]">
+    <div className="flex flex-col items-center dk:flex-row dk:items-center  dk:p-[20px] dk:gap-[160px] ">
+      <div className="banner dk:block mb:hidden tb:hidden w-[560px] h-[920px] p-[40px] dk:flex dk:flex-col dk:justify-between dk:items-start rounded-[12px]">
+        <img src={logo} alt="logo large" />
+        <div className="texts flex flex-col gap-[24px]">
+          <p className="text-[32px] text-white font-bold w-[450px] leading-[120%]">
+            Keep track of your money and save for your future
+          </p>
+          <p className="text-[14px] text-white font-normal">
+            Personal finance app puts you in control of your spending. Track
+            transactions, set budgets, and add to savings pots easily.
+          </p>
+        </div>
+      </div>
+      <div className="container w-[343px] tb:w-[560px] tb:p-[32px] tb:flex tb:flex-col tb:items-center bg-white rounded-[12px] py-[24px] px-[20px] mb-[168px] mt-[168px]">
+        <h1 className="text-[#201F24] tb:w-[496px] text-[32px] font-bold leading-[120%]">
           Sign Up
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +78,7 @@ export default function Signup() {
               type="text"
               id="name"
               {...register("name")}
-              className="w-[263px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
+              className="w-[263px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
             />
             <p className="text-red-600 tex-[14px] font-normal leading-[150%]">
               {errors.name?.message}
@@ -82,7 +95,7 @@ export default function Signup() {
               type="text"
               id="email"
               {...register("email")}
-              className="w-[263px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
+              className="w-[263px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
             />
             <p className="text-red-600 tex-[14px] font-normal leading-[150%]">
               {errors.email?.message}
@@ -99,7 +112,7 @@ export default function Signup() {
               type={type}
               id="password"
               {...register("password")}
-              className="w-[263px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
+              className="w-[263px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
             />
             <p className="text-red-600 tex-[14px] font-normal leading-[150%]">
               {errors.password?.message}
@@ -117,7 +130,7 @@ export default function Signup() {
           <div className="button flex justify-center mt-[32px]">
             <button
               type="submit"
-              className="text-white text-[14px] font-bold leading-[150%] w-[271px] py-[16px] bg-signup rounded-[8px]"
+              className="text-white tb:w-[496px] text-[14px] font-bold leading-[150%] w-[271px] py-[16px] bg-signup rounded-[8px]"
             >
               Create Account
             </button>

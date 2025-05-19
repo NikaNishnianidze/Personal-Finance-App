@@ -1,10 +1,15 @@
 import elipsis from "../../public/assets/images/icon-ellipsis.svg";
 import caretRight from "../../public/assets/images/icon-caret-right.svg";
+import closeIcon from "../../public/assets/images/icon-close-modal.svg";
 import { useUser } from "../context/UserProvider";
+import { useState } from "react";
 
 export default function Pots() {
   const { finance } = useUser();
   const savingTotal = finance.pots.filter((item) => item.name === "Savings");
+  const [addPot, setAddPot] = useState<boolean>(false);
+  const [potName, setPotName] = useState<string>("");
+  const [target, setTarget] = useState<string>("");
   const savingTarget = savingTotal.map((item) => item.target);
   const savingTotalNumber = savingTotal.map((item) => item.total);
   //concert ticket
@@ -30,10 +35,58 @@ export default function Pots() {
     <div className="flex flex-col items-center py-[9px] px-[16px]">
       <div className="first-line flex items-center justify-between w-full">
         <p className="text-[32px] text-[#201F24] font-bold">Pots</p>
-        <button className="w-[155px] rounded-[8px] text-white font-bold py-[16px] text-[14px] text-center bg-[#201F24]">
+        <button
+          onClick={() => setAddPot(true)}
+          className="w-[155px] rounded-[8px] text-white font-bold py-[16px] text-[14px] text-center bg-[#201F24]"
+        >
           + Add New Pot
         </button>
       </div>
+      {addPot && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
+            <div className="newbudget flex items-center justify-between">
+              <p className="text-[20px] text-[#201F24] font-bold">
+                Add New Pot
+              </p>
+              <img
+                onClick={() => setAddPot(false)}
+                src={closeIcon}
+                alt="close Icon"
+              />
+            </div>
+            <p className="mt-[24px] text-[14px] font-normal text-[#696868]">
+              Create a pot to set savings targets. These can help keep you on
+              track as you save for special purchases.
+            </p>
+            <div className="pot-name mt-[20px] flex flex-col gap-[4px] ">
+              <label
+                htmlFor="name"
+                className="text-[12px] text-[#696868] font-bold"
+              >
+                Pot Name
+              </label>
+              <input
+                onChange={(e) => setPotName(e.target.value)}
+                type="text"
+                name="name"
+                maxLength={30}
+                className="w-[295px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px] outline-none"
+              />
+            </div>
+            <div className="maximum-spent flex flex-col gap-[4px] mt-[16px]">
+              <p className="text-[12px] text-[#696868] font-bold">Target</p>
+              <div className="d w-[295px] py-[12px] px-[20px] flex items-center gap-[12px] border-[1px] rounded-[8px] border-[#98908B]">
+                <p className="text-[14px] text-[#696868] font-bold">$</p>
+                <input
+                  type="text"
+                  onChange={(e) => setTarget(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="savings-box w-[343px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[33.5px]">
         <div className="first-line flex items-center justify-between">
           <div className="name flex items-center">
