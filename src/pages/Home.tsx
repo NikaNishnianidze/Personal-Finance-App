@@ -307,7 +307,10 @@ export default function Home() {
                   Recurring Bills
                 </p>
               </div>
-              <div className="details flex items-center gap-[12px]">
+              <div
+                onClick={goBills}
+                className="details flex items-center gap-[12px]"
+              >
                 <p className="text-[#696868] font-normal text-[14px] leading-[150%]">
                   See Details
                 </p>

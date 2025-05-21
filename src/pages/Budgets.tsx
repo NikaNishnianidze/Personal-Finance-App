@@ -1,8 +1,9 @@
 import { useUser } from "../context/UserProvider";
 import elipsis from "../../public/assets/images/icon-ellipsis.svg";
 import caretRight from "../../public/assets/images/icon-caret-right.svg";
-import { use, useState } from "react";
+import { useState } from "react";
 import closeIcon from "../../public/assets/images/icon-close-modal.svg";
+import caretDown from "../../public/assets/images/icon-caret-down.svg";
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
@@ -12,10 +13,58 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 
 export default function Budgets() {
   const { finance } = useUser();
+  const usedThemes = finance.budgets.map((item) => item.theme);
+  const themes = [
+    {
+      label: "Green",
+      value: "green",
+      color: "#277C78",
+      status: usedThemes.includes("#277C78"),
+    },
+    {
+      label: "Yellow",
+      value: "yellow",
+      color: "#F2CDAC",
+      status: usedThemes.includes("#F2CDAC"),
+    },
+    {
+      label: "Cyan",
+      value: "cyan",
+      color: "#82C9D7",
+      status: usedThemes.includes("#82C9D7"),
+    },
+    {
+      label: "Navy",
+      value: "navy",
+      color: "#626070",
+      status: usedThemes.includes("#626070"),
+    },
+    {
+      label: "Red",
+      value: "red",
+      color: "#C94736",
+      status: usedThemes.includes("#C94736"),
+    },
+    {
+      label: "Purple",
+      value: "purple",
+      color: "#826CB0",
+      status: usedThemes.includes("#826CB0"),
+    },
+    {
+      label: "Turquoise",
+      value: "turquoise",
+      color: "#597C7C",
+      status: usedThemes.includes("#597C7C"),
+    },
+  ];
   const [addBudget, setAddBudget] = useState<boolean>(false);
   const [category, setCategory] = useState<string>("Entertainment");
-  const [theme, setTheme] = useState<string>("green");
-  const [maximumSpent, setMaximumSpent] = useState<string>();
+  const [maximumSpent, setMaximumSpent] = useState<number>();
+  const [dropDown, setDropDown] = useState<boolean>(false);
+  const [selectedTheme, setSelectedTheme] = useState(
+    themes.find((t) => t.value === "green")
+  );
   const spentBudget = finance.transactions.filter((t) => {
     const d = new Date(t.date);
     return (
@@ -83,8 +132,8 @@ export default function Budgets() {
         </button>
       </div>
       {addBudget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white p-6 rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
+        <div className="fixed mb-10 inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white relative rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
             <div className="newbudget flex items-center justify-between">
               <p className="text-[20px] text-[#201F24] font-bold">
                 Add New Budget
@@ -99,7 +148,7 @@ export default function Budgets() {
               Choose a category to set a spending budget. These categories can
               help you monitor spending.
             </p>
-            <div className="budget-category flex flex-col mt-[20px] gap-[4px]">
+            <div className="budget-category flex flex-col mt-[20px] gap-[4px] ">
               <p className="text-[12px] text-[#696868] font-bold">
                 Budget Category
               </p>
@@ -129,38 +178,63 @@ export default function Budgets() {
               <div className="d w-[295px] py-[12px] px-[20px] flex items-center gap-[12px] border-[1px] rounded-[8px] border-[#98908B]">
                 <p className="text-[14px] text-[#696868] font-bold">$</p>
                 <input
-                  type="text"
-                  onChange={(e) => setMaximumSpent(e.target.value)}
+                  type="number"
+                  className="outline-none"
+                  value={maximumSpent}
+                  onChange={(e) => setMaximumSpent(Number(e.target.value))}
                 />
               </div>
             </div>
             <div className="theme">
               <div className="budget-category flex flex-col mt-[16px] gap-[4px]">
                 <p className="text-[12px] text-[#696868] font-bold">Theme</p>
-                <div className="relative w-full">
-                  <select
-                    value={theme}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full outline-none appearance-none p-2 pr-8 border border-gray-400 rounded-md bg-white text-black"
-                  >
-                    <option value="green">
-                      <div className="circle w-[16px] h-[16px] bg-[#277C78] rounded-full"></div>
-                      Green
-                    </option>
-                    <option value="bills">Bills</option>
-                    <option value="groceries">Groceries</option>
-                    <option value="dining-out">Dining Out</option>
-                    <option value="transportation">Transportation</option>
-                    <option value="personal-care">Personal Care</option>
-                    <option value="education">Education</option>
-                  </select>
-                  <div className="absolute top-1/2 left-2"></div>
-                  <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
-                    ▼
+                <div
+                  onClick={() => setDropDown(!dropDown)}
+                  className="starter-value flex justify-between items-center w-[295px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px]"
+                >
+                  <div className="color flex items-center gap-[12px]">
+                    <div
+                      className="circle w-[16px] h-[16px] rounded-full"
+                      style={{ backgroundColor: selectedTheme?.color }}
+                    ></div>
+                    <p>{selectedTheme?.label}</p>
+                  </div>
+                  <div className="caret">
+                    <img src={caretDown} alt="caret down" />
                   </div>
                 </div>
+                {dropDown && (
+                  <div
+                    onClick={() => setDropDown(false)}
+                    className="absolute top-[190px] left-5 w-[295px] py-[12px] px-[20px] rounded-[8px] bg-white shadow-sort"
+                  >
+                    <div className="div flex flex-col gap-[24px] max-h-[120px] overflow-y-auto">
+                      {themes.map((item) => {
+                        return (
+                          <div
+                            onClick={() => setSelectedTheme(item)}
+                            key={item.label}
+                            className="flex items-center justify-between"
+                          >
+                            <div className="color flex items-center gap-[12px]">
+                              <div
+                                className="circle w-[16px] h-[16px] rounded-full"
+                                style={{ backgroundColor: item.color }}
+                              ></div>
+                              <p>{item.label}</p>
+                            </div>
+                            <div className="used"></div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
+            <button className="mt-[20px] py-[16px] w-[295px] bg-[#201F24] rounded-[8px] text-white font-bold text-[14px]">
+              Add Budget
+            </button>
           </div>
         </div>
       )}

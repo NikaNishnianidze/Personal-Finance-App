@@ -1,15 +1,64 @@
 import elipsis from "../../public/assets/images/icon-ellipsis.svg";
-import caretRight from "../../public/assets/images/icon-caret-right.svg";
+import caretDown from "../../public/assets/images/icon-caret-down.svg";
 import closeIcon from "../../public/assets/images/icon-close-modal.svg";
 import { useUser } from "../context/UserProvider";
 import { useState } from "react";
 
 export default function Pots() {
   const { finance } = useUser();
+  const usedThemes = finance.budgets.map((item) => item.theme);
+  const themes = [
+    {
+      label: "Green",
+      value: "green",
+      color: "#277C78",
+      status: usedThemes.includes("#277C78"),
+    },
+    {
+      label: "Yellow",
+      value: "yellow",
+      color: "#F2CDAC",
+      status: usedThemes.includes("#F2CDAC"),
+    },
+    {
+      label: "Cyan",
+      value: "cyan",
+      color: "#82C9D7",
+      status: usedThemes.includes("#82C9D7"),
+    },
+    {
+      label: "Navy",
+      value: "navy",
+      color: "#626070",
+      status: usedThemes.includes("#626070"),
+    },
+    {
+      label: "Red",
+      value: "red",
+      color: "#C94736",
+      status: usedThemes.includes("#C94736"),
+    },
+    {
+      label: "Purple",
+      value: "purple",
+      color: "#826CB0",
+      status: usedThemes.includes("#826CB0"),
+    },
+    {
+      label: "Turquoise",
+      value: "turquoise",
+      color: "#597C7C",
+      status: usedThemes.includes("#597C7C"),
+    },
+  ];
   const savingTotal = finance.pots.filter((item) => item.name === "Savings");
   const [addPot, setAddPot] = useState<boolean>(false);
   const [potName, setPotName] = useState<string>("");
   const [target, setTarget] = useState<string>("");
+  const [dropDown, setDropDown] = useState<boolean>(false);
+  const [selectedTheme, setSelectedTheme] = useState(
+    themes.find((t) => t.value === "green")
+  );
   const savingTarget = savingTotal.map((item) => item.target);
   const savingTotalNumber = savingTotal.map((item) => item.total);
   //concert ticket
@@ -43,8 +92,8 @@ export default function Pots() {
         </button>
       </div>
       {addPot && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white p-6 rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
+        <div className="fixed mb-10 inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white relative p-6 rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
             <div className="newbudget flex items-center justify-between">
               <p className="text-[20px] text-[#201F24] font-bold">
                 Add New Pot
@@ -84,6 +133,56 @@ export default function Pots() {
                 />
               </div>
             </div>
+            <div className="theme">
+              <div className="budget-category flex flex-col mt-[16px] gap-[4px]">
+                <p className="text-[12px] text-[#696868] font-bold">Theme</p>
+                <div
+                  onClick={() => setDropDown(!dropDown)}
+                  className="starter-value flex justify-between items-center w-[295px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px]"
+                >
+                  <div className="color flex items-center gap-[12px]">
+                    <div
+                      className="circle w-[16px] h-[16px] rounded-full"
+                      style={{ backgroundColor: selectedTheme?.color }}
+                    ></div>
+                    <p>{selectedTheme?.label}</p>
+                  </div>
+                  <div className="caret">
+                    <img src={caretDown} alt="caret down" />
+                  </div>
+                </div>
+                {dropDown && (
+                  <div
+                    onClick={() => setDropDown(false)}
+                    className="absolute top-[190px] left-5 w-[295px] py-[12px] px-[20px] rounded-[8px] bg-white shadow-sort"
+                  >
+                    <div className="div flex flex-col gap-[24px] max-h-[120px] overflow-y-auto">
+                      {themes.map((item) => {
+                        return (
+                          <div
+                            onClick={() => setSelectedTheme(item)}
+                            key={item.label}
+                            className="flex items-center justify-between"
+                          >
+                            <div className="color flex items-center gap-[12px]">
+                              <div
+                                className="circle w-[16px] h-[16px] rounded-full"
+                                style={{ backgroundColor: item.color }}
+                              ></div>
+                              <p>{item.label}</p>
+                            </div>
+                            <div className="used"></div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <button className="mt-[20px] py-[16px] w-[295px] bg-[#201F24] rounded-[8px] text-white font-bold text-[14px]">
+              Add Pot
+            </button>
           </div>
         </div>
       )}
