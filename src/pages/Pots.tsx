@@ -92,10 +92,10 @@ export default function Pots() {
         </button>
       </div>
       {addPot && (
-        <div className="fixed mb-10 inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white relative p-6 rounded-xl shadow-lg w-[335px] py-[28px] px-[20px]">
+        <div className="fixed mb-10 inset-0 z-50 flex items-center tb:h-full tb:ml-[300px] justify-center bg-black/50">
+          <div className="bg-white relative p-6 rounded-xl shadow-lg tb:w-[560px] tb:p-[32px] w-[335px] py-[28px] px-[20px]">
             <div className="newbudget flex items-center justify-between">
-              <p className="text-[20px] text-[#201F24] font-bold">
+              <p className="text-[20px] text-[#201F24] font-bold tb:text-[32px]">
                 Add New Pot
               </p>
               <img
@@ -120,12 +120,12 @@ export default function Pots() {
                 type="text"
                 name="name"
                 maxLength={30}
-                className="w-[295px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px] outline-none"
+                className="w-[295px] tb:w-[496px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px] outline-none"
               />
             </div>
             <div className="maximum-spent flex flex-col gap-[4px] mt-[16px]">
               <p className="text-[12px] text-[#696868] font-bold">Target</p>
-              <div className="d w-[295px] py-[12px] px-[20px] flex items-center gap-[12px] border-[1px] rounded-[8px] border-[#98908B]">
+              <div className="d w-[295px] tb:w-[496px] py-[12px] px-[20px] flex items-center gap-[12px] border-[1px] rounded-[8px] border-[#98908B]">
                 <p className="text-[14px] text-[#696868] font-bold">$</p>
                 <input
                   type="text"
@@ -138,7 +138,7 @@ export default function Pots() {
                 <p className="text-[12px] text-[#696868] font-bold">Theme</p>
                 <div
                   onClick={() => setDropDown(!dropDown)}
-                  className="starter-value flex justify-between items-center w-[295px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px]"
+                  className="starter-value flex justify-between items-center tb:w-[496px] w-[295px] rounded-[8px] border-[1px] border-[#98908B] py-[12px] px-[20px]"
                 >
                   <div className="color flex items-center gap-[12px]">
                     <div
@@ -154,7 +154,7 @@ export default function Pots() {
                 {dropDown && (
                   <div
                     onClick={() => setDropDown(false)}
-                    className="absolute top-[190px] left-5 w-[295px] py-[12px] px-[20px] rounded-[8px] bg-white shadow-sort"
+                    className="absolute top-[190px] tb:w-[496px] tb:left-8 left-5 w-[295px] py-[12px] px-[20px] rounded-[8px] bg-white shadow-sort"
                   >
                     <div className="div flex flex-col gap-[24px] max-h-[120px] overflow-y-auto">
                       {themes.map((item) => {
@@ -180,7 +180,7 @@ export default function Pots() {
                 )}
               </div>
             </div>
-            <button className="mt-[20px] py-[16px] w-[295px] bg-[#201F24] rounded-[8px] text-white font-bold text-[14px]">
+            <button className="mt-[20px] tb:w-[496px] py-[16px] w-[295px] bg-[#201F24] rounded-[8px] text-white font-bold text-[14px]">
               Add Pot
             </button>
           </div>

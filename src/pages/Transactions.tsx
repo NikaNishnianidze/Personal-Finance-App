@@ -145,11 +145,11 @@ export default function Transactions() {
             </div>
           )}
           <div className="search-filter-category mb:flex mb:items-center mb:gap-[24px] dk:justify-between dk:w-[996px]">
-            <div className="search flex justify-between tb:w-[160px] w-[215px] px-[15px] rounded-[8px] border-[#98908B] border-[1px]">
+            <div className="search flex justify-between dk:w-[320px] tb:w-[160px] w-[215px] px-[15px] rounded-[8px] border-[#98908B] border-[1px]">
               <input
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
-                className="w-[143px] py-[12px] tb:w-[90px] outline-none text-[14px] text-[#98908B] font-normal leading-[150%]"
+                className="w-[143px] py-[12px] dk:w-[150px]  tb:w-[90px] outline-none text-[14px] text-[#98908B] font-normal leading-[150%]"
                 placeholder="Search transaction"
               />
               <img src={searchIcon} alt="search icon" />
