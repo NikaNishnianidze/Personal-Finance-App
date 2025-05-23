@@ -81,8 +81,8 @@ export default function Pots() {
   const holidayTotalNumber = holidayTotal.map((item) => item.total);
 
   return (
-    <div className="flex flex-col items-center py-[9px] px-[16px]">
-      <div className="first-line flex items-center justify-between w-full">
+    <div className="flex flex-col items-center py-[9px] px-[16px] dk:ml-[300px] dk:mt-[40px]">
+      <div className="first-line flex items-center justify-between w-full tb:w-[688px] dk:w-[1060px]">
         <p className="text-[32px] text-[#201F24] font-bold">Pots</p>
         <button
           onClick={() => setAddPot(true)}
@@ -186,238 +186,250 @@ export default function Pots() {
           </div>
         </div>
       )}
-      <div className="savings-box w-[343px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[33.5px]">
-        <div className="first-line flex items-center justify-between">
-          <div className="name flex items-center">
-            <div className="circle w-[16px] h-[16px] rounded-full bg-[#277C78]"></div>
-            <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
-              Savings
+      <div className="boxes dk:flex dk:flex-wrap dk:gap-[24px] dk:mt-[32px] dk:justify-center">
+        <div className="savings-box w-[343px] dk:mt-0 tb:w-[688px] dk:w-[518px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[33.5px]">
+          <div className="first-line flex items-center justify-between">
+            <div className="name flex items-center">
+              <div className="circle w-[16px] h-[16px] rounded-full bg-[#277C78]"></div>
+              <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
+                Savings
+              </p>
+            </div>
+            <div className="dots">
+              <img src={elipsis} alt="elipsis icon" />
+            </div>
+          </div>
+          <div className="totalsaved mt-[42.5px] flex items-center justify-between">
+            <p className="text-[14px] font-normal text-[#696868]">
+              Total Saved
+            </p>
+            <p className="text-[32px] font-bold text-[#201F24]">
+              ${savingTotal.map((item) => item.total.toFixed(2))}
             </p>
           </div>
-          <div className="dots">
-            <img src={elipsis} alt="elipsis icon" />
+          <div className="progressline mt-[16px] w-[303px] dk:w-[470px] tb:w-[640px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
+            <div
+              className={`line bg-[#277C78] h-full rounded-[4px]`}
+              style={{
+                width: `${(savingTotalNumber[0] / savingTarget[0]) * 100}%`,
+              }}
+            ></div>
           </div>
-        </div>
-        <div className="totalsaved mt-[42.5px] flex items-center justify-between">
-          <p className="text-[14px] font-normal text-[#696868]">Total Saved</p>
-          <p className="text-[32px] font-bold text-[#201F24]">
-            ${savingTotal.map((item) => item.total.toFixed(2))}
-          </p>
-        </div>
-        <div className="progressline mt-[16px] w-[303px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
-          <div
-            className={`line bg-[#277C78] h-full rounded-[4px]`}
-            style={{
-              width: `${(savingTotalNumber[0] / savingTarget[0]) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <div className="progress-info flex items-center mt-[13px] justify-between">
-          <p className="text-[12px] font-bold text-[#696868]">
-            {(savingTotalNumber[0] / savingTarget[0]) * 100}%
-          </p>
-          <p className="text-[12px] font-bold text-[#696868]">
-            Target of ${savingTarget.toLocaleString()}
-          </p>
-        </div>
-        <div className="buttons mt-[42.5px] flex items-center justify-between">
-          <div className="add">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              + Add Money
-            </button>
-          </div>
-          <div className="withdraw">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              Withdraw
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="concert-ticketbox w-[343px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
-        <div className="first-line flex items-center justify-between">
-          <div className="name flex items-center">
-            <div className="circle w-[16px] h-[16px] rounded-full bg-[#626070]"></div>
-            <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
-              Concert Ticket
+          <div className="progress-info flex items-center mt-[13px] justify-between">
+            <p className="text-[12px] font-bold text-[#696868]">
+              {(savingTotalNumber[0] / savingTarget[0]) * 100}%
+            </p>
+            <p className="text-[12px] font-bold text-[#696868]">
+              Target of ${savingTarget.toLocaleString()}
             </p>
           </div>
-          <div className="dots">
-            <img src={elipsis} alt="elipsis icon" />
+          <div className="buttons mt-[42.5px] flex items-center justify-between">
+            <div className="add">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                + Add Money
+              </button>
+            </div>
+            <div className="withdraw">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                Withdraw
+              </button>
+            </div>
           </div>
         </div>
-        <div className="totalsaved mt-[42.5px] flex items-center justify-between">
-          <p className="text-[14px] font-normal text-[#696868]">Total Saved</p>
-          <p className="text-[32px] font-bold text-[#201F24]">
-            ${concertTotalNumber[0].toFixed(2)}
-          </p>
-        </div>
-        <div className="progressline mt-[16px] w-[303px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
-          <div
-            className={`line bg-[#626070] h-full rounded-[4px]`}
-            style={{
-              width: `${(concertTotalNumber[0] / concertTarget[0]) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <div className="progress-info flex items-center mt-[13px] justify-between">
-          <p className="text-[12px] font-bold text-[#696868]">
-            {((concertTotalNumber[0] / concertTarget[0]) * 100).toFixed(1)}%
-          </p>
-          <p className="text-[12px] font-bold text-[#696868]">
-            Target of ${concertTarget.toLocaleString()}
-          </p>
-        </div>
-        <div className="buttons mt-[42.5px] flex items-center justify-between">
-          <div className="add">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              + Add Money
-            </button>
+        <div className="concert-ticketbox w-[343px] dk:mt-0 tb:w-[688px] dk:w-[518px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
+          <div className="first-line flex items-center justify-between">
+            <div className="name flex items-center">
+              <div className="circle w-[16px] h-[16px] rounded-full bg-[#626070]"></div>
+              <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
+                Concert Ticket
+              </p>
+            </div>
+            <div className="dots">
+              <img src={elipsis} alt="elipsis icon" />
+            </div>
           </div>
-          <div className="withdraw">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              Withdraw
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="gift-box w-[343px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
-        <div className="first-line flex items-center justify-between">
-          <div className="name flex items-center">
-            <div className="circle w-[16px] h-[16px] rounded-full bg-[#82C9D7]"></div>
-            <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
-              Gift
+          <div className="totalsaved mt-[42.5px] flex items-center justify-between">
+            <p className="text-[14px] font-normal text-[#696868]">
+              Total Saved
+            </p>
+            <p className="text-[32px] font-bold text-[#201F24]">
+              ${concertTotalNumber[0].toFixed(2)}
             </p>
           </div>
-          <div className="dots">
-            <img src={elipsis} alt="elipsis icon" />
+          <div className="progressline mt-[16px] w-[303px] dk:w-[470px] tb:w-[640px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
+            <div
+              className={`line bg-[#626070] h-full rounded-[4px]`}
+              style={{
+                width: `${(concertTotalNumber[0] / concertTarget[0]) * 100}%`,
+              }}
+            ></div>
           </div>
-        </div>
-        <div className="totalsaved mt-[42.5px] flex items-center justify-between">
-          <p className="text-[14px] font-normal text-[#696868]">Total Saved</p>
-          <p className="text-[32px] font-bold text-[#201F24]">
-            ${giftTotalNumber[0].toFixed(2)}
-          </p>
-        </div>
-        <div className="progressline mt-[16px] w-[303px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
-          <div
-            className={`line bg-[#82C9D7] h-full rounded-[4px]`}
-            style={{
-              width: `${(giftTotalNumber[0] / giftTarget[0]) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <div className="progress-info flex items-center mt-[13px] justify-between">
-          <p className="text-[12px] font-bold text-[#696868]">
-            {((giftTotalNumber[0] / giftTarget[0]) * 100).toFixed(1)}%
-          </p>
-          <p className="text-[12px] font-bold text-[#696868]">
-            Target of ${giftTarget.toLocaleString()}
-          </p>
-        </div>
-        <div className="buttons mt-[42.5px] flex items-center justify-between">
-          <div className="add">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              + Add Money
-            </button>
-          </div>
-          <div className="withdraw">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              Withdraw
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="new-laptop-box w-[343px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
-        <div className="first-line flex items-center justify-between">
-          <div className="name flex items-center">
-            <div className="circle w-[16px] h-[16px] rounded-full bg-[#F2CDAC]"></div>
-            <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
-              New Laptop
+          <div className="progress-info flex items-center mt-[13px] justify-between">
+            <p className="text-[12px] font-bold text-[#696868]">
+              {((concertTotalNumber[0] / concertTarget[0]) * 100).toFixed(1)}%
+            </p>
+            <p className="text-[12px] font-bold text-[#696868]">
+              Target of ${concertTarget.toLocaleString()}
             </p>
           </div>
-          <div className="dots">
-            <img src={elipsis} alt="elipsis icon" />
+          <div className="buttons mt-[42.5px] flex items-center justify-between">
+            <div className="add">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                + Add Money
+              </button>
+            </div>
+            <div className="withdraw">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                Withdraw
+              </button>
+            </div>
           </div>
         </div>
-        <div className="totalsaved mt-[42.5px] flex items-center justify-between">
-          <p className="text-[14px] font-normal text-[#696868]">Total Saved</p>
-          <p className="text-[32px] font-bold text-[#201F24]">
-            ${laptopTotalNumber[0].toFixed(2)}
-          </p>
-        </div>
-        <div className="progressline mt-[16px] w-[303px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
-          <div
-            className={`line bg-[#F2CDAC] h-full rounded-[4px]`}
-            style={{
-              width: `${(laptopTotalNumber[0] / laptopTarget[0]) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <div className="progress-info flex items-center mt-[13px] justify-between">
-          <p className="text-[12px] font-bold text-[#696868]">
-            {((laptopTotalNumber[0] / laptopTarget[0]) * 100).toFixed(1)}%
-          </p>
-          <p className="text-[12px] font-bold text-[#696868]">
-            Target of ${laptopTarget.toLocaleString()}
-          </p>
-        </div>
-        <div className="buttons mt-[42.5px] flex items-center justify-between">
-          <div className="add">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              + Add Money
-            </button>
+        <div className="gift-box w-[343px] rounded-[12px] dk:mt-0 dk:w-[518px] tb:w-[688px] bg-white py-[24px] px-[20px] mt-[24px]">
+          <div className="first-line flex items-center justify-between">
+            <div className="name flex items-center">
+              <div className="circle w-[16px] h-[16px] rounded-full bg-[#82C9D7]"></div>
+              <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
+                Gift
+              </p>
+            </div>
+            <div className="dots">
+              <img src={elipsis} alt="elipsis icon" />
+            </div>
           </div>
-          <div className="withdraw">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              Withdraw
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="Holiday-box mb-20 w-[343px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
-        <div className="first-line flex items-center justify-between">
-          <div className="name flex items-center">
-            <div className="circle w-[16px] h-[16px] rounded-full bg-[#826CB0]"></div>
-            <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
-              Holiday
+          <div className="totalsaved mt-[42.5px] flex items-center justify-between">
+            <p className="text-[14px] font-normal text-[#696868]">
+              Total Saved
+            </p>
+            <p className="text-[32px] font-bold text-[#201F24]">
+              ${giftTotalNumber[0].toFixed(2)}
             </p>
           </div>
-          <div className="dots">
-            <img src={elipsis} alt="elipsis icon" />
+          <div className="progressline mt-[16px] w-[303px] dk:w-[470px] tb:w-[640px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
+            <div
+              className={`line bg-[#82C9D7] h-full rounded-[4px]`}
+              style={{
+                width: `${(giftTotalNumber[0] / giftTarget[0]) * 100}%`,
+              }}
+            ></div>
+          </div>
+          <div className="progress-info flex items-center mt-[13px] justify-between">
+            <p className="text-[12px] font-bold text-[#696868]">
+              {((giftTotalNumber[0] / giftTarget[0]) * 100).toFixed(1)}%
+            </p>
+            <p className="text-[12px] font-bold text-[#696868]">
+              Target of ${giftTarget.toLocaleString()}
+            </p>
+          </div>
+          <div className="buttons mt-[42.5px] flex items-center justify-between">
+            <div className="add">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                + Add Money
+              </button>
+            </div>
+            <div className="withdraw">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                Withdraw
+              </button>
+            </div>
           </div>
         </div>
-        <div className="totalsaved mt-[42.5px] flex items-center justify-between">
-          <p className="text-[14px] font-normal text-[#696868]">Total Saved</p>
-          <p className="text-[32px] font-bold text-[#201F24]">
-            ${holidayTotalNumber[0].toFixed(2)}
-          </p>
-        </div>
-        <div className="progressline mt-[16px] w-[303px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
-          <div
-            className={`line bg-[#826CB0] h-full rounded-[4px]`}
-            style={{
-              width: `${(holidayTotalNumber[0] / holidayTarget[0]) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <div className="progress-info flex items-center mt-[13px] justify-between">
-          <p className="text-[12px] font-bold text-[#696868]">
-            {((holidayTotalNumber[0] / holidayTarget[0]) * 100).toFixed(1)}%
-          </p>
-          <p className="text-[12px] font-bold text-[#696868]">
-            Target of ${holidayTarget.toLocaleString()}
-          </p>
-        </div>
-        <div className="buttons mt-[42.5px] flex items-center justify-between">
-          <div className="add">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              + Add Money
-            </button>
+        <div className="new-laptop-box w-[343px] dk:mt-0 dk:w-[518px] tb:w-[688px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
+          <div className="first-line flex items-center justify-between">
+            <div className="name flex items-center">
+              <div className="circle w-[16px] h-[16px] rounded-full bg-[#F2CDAC]"></div>
+              <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
+                New Laptop
+              </p>
+            </div>
+            <div className="dots">
+              <img src={elipsis} alt="elipsis icon" />
+            </div>
           </div>
-          <div className="withdraw">
-            <button className="w-[143.5px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
-              Withdraw
-            </button>
+          <div className="totalsaved mt-[42.5px] flex items-center justify-between">
+            <p className="text-[14px] font-normal text-[#696868]">
+              Total Saved
+            </p>
+            <p className="text-[32px] font-bold text-[#201F24]">
+              ${laptopTotalNumber[0].toFixed(2)}
+            </p>
+          </div>
+          <div className="progressline mt-[16px]  w-[303px] dk:w-[470px] tb:w-[640px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
+            <div
+              className={`line bg-[#F2CDAC] h-full rounded-[4px]`}
+              style={{
+                width: `${(laptopTotalNumber[0] / laptopTarget[0]) * 100}%`,
+              }}
+            ></div>
+          </div>
+          <div className="progress-info flex items-center mt-[13px] justify-between">
+            <p className="text-[12px] font-bold text-[#696868]">
+              {((laptopTotalNumber[0] / laptopTarget[0]) * 100).toFixed(1)}%
+            </p>
+            <p className="text-[12px] font-bold text-[#696868]">
+              Target of ${laptopTarget.toLocaleString()}
+            </p>
+          </div>
+          <div className="buttons mt-[42.5px] flex items-center justify-between">
+            <div className="add">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                + Add Money
+              </button>
+            </div>
+            <div className="withdraw">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                Withdraw
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="Holiday-box mb-20 dk:mt-0 w-[343px] dk:w-[518px] tb:w-[688px] rounded-[12px] bg-white py-[24px] px-[20px] mt-[24px]">
+          <div className="first-line flex items-center justify-between">
+            <div className="name flex items-center">
+              <div className="circle w-[16px] h-[16px] rounded-full bg-[#826CB0]"></div>
+              <p className="ml-[16px] text-[20px] text-[#201F24] font-bold">
+                Holiday
+              </p>
+            </div>
+            <div className="dots">
+              <img src={elipsis} alt="elipsis icon" />
+            </div>
+          </div>
+          <div className="totalsaved mt-[42.5px] flex items-center justify-between">
+            <p className="text-[14px] font-normal text-[#696868]">
+              Total Saved
+            </p>
+            <p className="text-[32px] font-bold text-[#201F24]">
+              ${holidayTotalNumber[0].toFixed(2)}
+            </p>
+          </div>
+          <div className="progressline mt-[16px] w-[303px] dk:w-[470px] tb:w-[640px] h-[8px] bg-[#F8F4F0] rounded-[4px]">
+            <div
+              className={`line bg-[#826CB0] h-full rounded-[4px]`}
+              style={{
+                width: `${(holidayTotalNumber[0] / holidayTarget[0]) * 100}%`,
+              }}
+            ></div>
+          </div>
+          <div className="progress-info flex items-center mt-[13px] justify-between">
+            <p className="text-[12px] font-bold text-[#696868]">
+              {((holidayTotalNumber[0] / holidayTarget[0]) * 100).toFixed(1)}%
+            </p>
+            <p className="text-[12px] font-bold text-[#696868]">
+              Target of ${holidayTarget.toLocaleString()}
+            </p>
+          </div>
+          <div className="buttons mt-[42.5px] flex items-center justify-between">
+            <div className="add">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                + Add Money
+              </button>
+            </div>
+            <div className="withdraw">
+              <button className="w-[143.5px] dk:w-[227px] tb:w-[312px] text-[14px] font-bold text-[#201F24] py-[16px] text-center bg-[#F8F4F0] rounded-8px">
+                Withdraw
+              </button>
+            </div>
           </div>
         </div>
       </div>

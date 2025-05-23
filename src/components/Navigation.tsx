@@ -140,7 +140,12 @@ export default function Navigation() {
 
       <header className="hidden dk:flex dk:flex-col dk:fixed dk:top-0 dk:left-0 dk:h-full dk:w-[300px] dk:py-[40px]  dk:bg-headercolor dk:justify-start dk:items-start dk:gap-2 dk:shadow-md">
         <div className="logo ">
-          <img src={logo} alt="logo icon" className="ml-[32px]" />
+          <img
+            onClick={() => GoHome()}
+            src={logo}
+            alt="logo icon"
+            className="ml-[32px]"
+          />
         </div>
         <div
           onClick={GoHome}
