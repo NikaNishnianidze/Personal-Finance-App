@@ -78,7 +78,7 @@ export default function Signup() {
               type="text"
               id="name"
               {...register("name")}
-              className="w-[263px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
+              className="mb:w-[303px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
             />
             <p className="text-red-600 tex-[14px] font-normal leading-[150%]">
               {errors.name?.message}
@@ -95,7 +95,7 @@ export default function Signup() {
               type="text"
               id="email"
               {...register("email")}
-              className="w-[263px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
+              className="mb:w-[303px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
             />
             <p className="text-red-600 tex-[14px] font-normal leading-[150%]">
               {errors.email?.message}
@@ -112,7 +112,7 @@ export default function Signup() {
               type={type}
               id="password"
               {...register("password")}
-              className="w-[263px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
+              className="mb:w-[303px] tb:w-[496px] rounded-[8px] py-[12px] px-[20px] bg-white outline-none border-[1px] border-[#98908B]"
             />
             <p className="text-red-600 tex-[14px] font-normal leading-[150%]">
               {errors.password?.message}
