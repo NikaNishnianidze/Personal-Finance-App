@@ -26,7 +26,7 @@ const filterItems = [
   "General",
 ];
 export default function Transactions() {
-  const { finance, setFinance } = useUser();
+  const { finance } = useUser();
   const [currentPage, setCurrentPage] = useState<number>(2);
   const [search, setSearch] = useState<string>("");
   const [sort, setSort] = useState<boolean>(false);
@@ -149,7 +149,7 @@ export default function Transactions() {
               <input
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
-                className="w-[143px] py-[12px] dk:w-[150px]  tb:w-[90px] outline-none text-[14px] text-[#98908B] font-normal leading-[150%]"
+                className="w-[143px] py-[12px] dk:w-[150px] cursor-pointer tb:w-[90px] outline-none text-[14px] text-[#98908B] font-normal leading-[150%]"
                 placeholder="Search transaction"
               />
               <img src={searchIcon} alt="search icon" />
@@ -168,7 +168,7 @@ export default function Transactions() {
                 <p className="text-[#696868] text-[14px] font-normal">
                   Sort by
                 </p>
-                <div className="w-[114px] py-[12px] gap-[16px] px-[20px] border-[1px] border-[#98908B] rounded-[8px] flex items-center">
+                <div className="w-[114px] cursor-pointer py-[12px] gap-[16px] px-[20px] border-[1px] border-[#98908B] rounded-[8px] flex items-center">
                   <p className="text-[14px] text-[#201F24] font-normal">
                     {sortIndex !== null ? sortItems[sortIndex] : "Latest"}
                   </p>
@@ -187,7 +187,7 @@ export default function Transactions() {
                 </p>
                 <div
                   onClick={() => setFilter(!filter)}
-                  className="category w-[177px] py-[12px] px-[20px] border-[1px] flex items-center gap-[16px] border-[#98908B] rounded-[8px]"
+                  className="category cursor-pointer w-[177px] py-[12px] px-[20px] border-[1px] flex items-center gap-[16px] border-[#98908B] rounded-[8px]"
                 >
                   <p className="text-[14px] text-[#201F24] font-normal">
                     {filterIndex !== null
@@ -262,7 +262,7 @@ export default function Transactions() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-[12px] py-[8px] bg-[#fff] border-[1px] tb:w-[94px] border-[#98908B] tb:flex tb:items-center tb:gap-[16px]  w-[40px] h-[40px] rounded-[8px] text-[#696868] font-bold"
+              className="px-[12px] py-[8px] hover:bg-[#98908B] hover:text-white bg-[#fff] border-[1px] tb:w-[94px] border-[#98908B] tb:flex tb:items-center tb:gap-[16px]  w-[40px] h-[40px] rounded-[8px] text-[#696868] font-bold"
             >
               <img src={caretLeft} alt="" />
               <span className="hidden tb:inline">Prev</span>
@@ -280,7 +280,7 @@ export default function Transactions() {
                     <button
                       key={i}
                       onClick={() => handlePageChange(i + 1)}
-                      className={`px-[12px] py-[8px] border-[1px] mr-3  border-[#98908B] rounded-[8px] w-[40px] h-[40px] ${
+                      className={`px-[12px] py-[8px] hover:text-white hover:bg-[#98908B] border-[1px] mr-3  border-[#98908B] rounded-[8px] w-[40px] h-[40px] ${
                         currentPage === i + 1
                           ? "bg-[#201F24] text-white"
                           : "bg-[#FFFFFF] text-[#98908B]"
@@ -319,7 +319,7 @@ export default function Transactions() {
                 <button
                   key={i}
                   onClick={() => handlePageChange(i + 1)}
-                  className={`px-[12px] py-[8px] border-[1px] mr-3 border-[#98908B] rounded-[8px] w-[40px] h-[40px] ${
+                  className={`px-[12px] py-[8px]  hover:text-white hover:bg-[#98908B] border-[1px] mr-3 border-[#98908B] rounded-[8px] w-[40px] h-[40px] ${
                     currentPage === i + 1
                       ? "bg-[#201F24] text-white"
                       : "bg-[#FFFFFF] text-[#98908B]"
@@ -333,7 +333,7 @@ export default function Transactions() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-[12px] border-[1px] tb:flex tb:items-center tb:gap-[16px] border-[#98908B] tb:w-[94px] w-[40px] h-[40px] py-[8px] bg-[#F8F4F0] rounded-[8px] text-[#696868] font-bold"
+              className="px-[12px] hover:bg-[#98908B] hover:text-white border-[1px] tb:flex tb:items-center tb:gap-[16px] border-[#98908B] tb:w-[94px] w-[40px] h-[40px] py-[8px] bg-[#F8F4F0] rounded-[8px] text-[#696868] font-bold"
             >
               <span className="hidden tb:inline">Next</span>
               <img src={caretRight} alt="" />

@@ -6,14 +6,11 @@ import sortIcon from "../../public/assets/images/icon-sort-mobile.svg";
 import redExcl from "../../public/assets/images/icon-bill-due.svg";
 import { useState } from "react";
 import caretDown from "../../public/assets/images/icon-caret-down.svg";
-import filterIcon from "../../public/assets/images/icon-filter-mobile.svg";
 
 export default function Bills() {
   const { finance } = useUser();
   const [sort, setSort] = useState<boolean>(false);
   const [sortIndex, setSortIndex] = useState<number | null>(null);
-  const [filter, setFilter] = useState<boolean>(false);
-  const [filterIndex, setFilterIndex] = useState<number | null>(null);
   const [search, setSearch] = useState<string>("");
   const sortItems = [
     "Latest",
@@ -219,7 +216,7 @@ export default function Bills() {
                         onClick={() => handleSort(i)}
                         key={i}
                         style={{ fontWeight: sortIndex == i ? 700 : 400 }}
-                        className="text-[14px] text-[#201F24] font-normal"
+                        className="text-[14px] cursor-pointer text-[#201F24] font-normal"
                       >
                         {item}
                       </p>
@@ -233,7 +230,7 @@ export default function Bills() {
                 <input
                   onChange={(e) => setSearch(e.target.value)}
                   type="text"
-                  className="w-[143px] tb:w-[200px] py-[12px] tb:w-[90px] outline-none text-[14px] text-[#98908B] font-normal leading-[150%]"
+                  className="w-[143px] tb:w-[200px] cursor-pointer py-[12px] tb:w-[90px] outline-none text-[14px] text-[#98908B] font-normal leading-[150%]"
                   placeholder="Search transaction"
                 />
                 <img src={searchIcon} alt="search icon" />
@@ -252,7 +249,7 @@ export default function Bills() {
                   <p className="text-[#696868] text-[14px] font-normal">
                     Sort by
                   </p>
-                  <div className="w-[114px] py-[12px] gap-[16px] px-[20px] border-[1px] border-[#98908B] rounded-[8px] flex items-center">
+                  <div className="w-[114px] cursor-pointer py-[12px] gap-[16px] px-[20px] border-[1px] border-[#98908B] rounded-[8px] flex items-center">
                     <p className="text-[14px] text-[#201F24] font-normal">
                       {sortIndex !== null ? sortItems[sortIndex] : "Latest"}
                     </p>

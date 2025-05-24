@@ -1,10 +1,4 @@
-import {
-  createContext,
-  use,
-  useContext,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { IInputs } from "../Inputs";
 import data from "../data.json";
 import type { TFinance } from "../data";

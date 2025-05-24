@@ -122,7 +122,7 @@ export default function Home() {
                 onClick={goPots}
                 className="see-details flex items-center gap-[12px]"
               >
-                <p className="text-[#696868] font-normal text-[14px] leading-[150%]">
+                <p className="text-[#696868] font-normal cursor-pointer text-[14px] leading-[150%]">
                   See Details
                 </p>
                 <img src={caretRight} alt="caret right" />
@@ -178,7 +178,7 @@ export default function Home() {
                 onClick={goTransactions}
                 className="details flex items-center gap-[12px]"
               >
-                <p className="text-[#696868] font-normal text-[14px] leading-[150%]">
+                <p className="text-[#696868] cursor-pointer font-normal text-[14px] leading-[150%]">
                   View All
                 </p>
                 <img src={caretRight} alt="caret right" />
@@ -235,7 +235,7 @@ export default function Home() {
                 onClick={goBudget}
                 className="details flex items-center gap-[12px]"
               >
-                <p className="text-[#696868] font-normal text-[14px] leading-[150%]">
+                <p className="text-[#696868] cursor-pointer font-normal text-[14px] leading-[150%]">
                   See Details
                 </p>
                 <img src={caretRight} alt="caret right" />
@@ -311,7 +311,7 @@ export default function Home() {
                 onClick={goBills}
                 className="details flex items-center gap-[12px]"
               >
-                <p className="text-[#696868] font-normal text-[14px] leading-[150%]">
+                <p className="text-[#696868] cursor-pointer font-normal text-[14px] leading-[150%]">
                   See Details
                 </p>
                 <img src={caretRight} alt="caret right" />

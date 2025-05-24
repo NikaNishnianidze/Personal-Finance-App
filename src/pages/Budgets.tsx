@@ -88,46 +88,6 @@ export default function Budgets() {
     (acc, item) => acc + item.amount,
     0
   );
-  const entertainment = finance.budgets.filter(
-    (item) => item.category == "Entertainment"
-  );
-  const bills = finance.budgets.filter((item) => item.category == "Bills");
-  const tranBills = finance.transactions.filter((t) => {
-    return t.category === "Bills";
-  });
-  const totalTranBills = tranBills.reduce((acc, item) => acc + item.amount, 0);
-  const billsMaximum = bills.map((item) => item.maximum);
-  //dining
-  const dining = finance.budgets.filter(
-    (item) => item.category == "Dining Out"
-  );
-  const diningMaximum = dining.map((item) => item.maximum);
-  const tranDining = finance.transactions.filter((t) => {
-    const d = new Date(t.date);
-    return t.category === "Dining Out" && d.getMonth() === 7;
-  });
-
-  const totalTranDining = 67;
-
-  //personal care
-  const care = finance.budgets.filter(
-    (item) => item.category === "Personal Care"
-  );
-  const careMaximum = care.map((item) => item.maximum);
-  const tranCare = finance.transactions.filter(
-    (t) => t.category === "Personal Care"
-  );
-  const totalTranCare = tranCare.reduce((acc, item) => acc + item.amount, 0);
-
-  //entertainment
-  const entertainmentMaximum = entertainment.map((item) => item.maximum);
-  const entertainmentSpent = finance.transactions.filter((t) => {
-    return t.category === "Entertainment";
-  });
-  const totalEntertainmentSpent = entertainmentSpent.reduce(
-    (acc, item) => acc + item.amount,
-    0
-  );
   const handleAddBudget = () => {
     if (!category || !maximumSpent || !selectedTheme) return;
 
@@ -257,7 +217,7 @@ export default function Budgets() {
         <p className="text-[32px] text-[#201F24] font-bold">Budgets</p>
         <button
           onClick={() => setAddBudget(true)}
-          className="w-[155px] rounded-[8px] text-white font-bold py-[16px] text-[14px] text-center bg-[#201F24]"
+          className="w-[155px] rounded-[8px] hover:bg-[#696868] text-white font-bold py-[16px] text-[14px] text-center bg-[#201F24]"
         >
           + Add New Budget
         </button>
@@ -265,7 +225,7 @@ export default function Budgets() {
       {addBudget && (
         <div className="fixed mb-10 inset-0 z-50 flex h-full dk:ml-[300px] items-center justify-center bg-black/50">
           <div className="bg-white relative rounded-xl shadow-lg w-[335px] dk:w-[560px] tb:p-[32px] dk:p-[32px] tb:w-[560px] py-[28px] px-[20px]">
-            <div className="newbudget flex items-center justify-between">
+            <div className="newbudget cursor-pointer flex items-center justify-between">
               <p className="text-[20px] text-[#201F24] font-bold dk:text-[32px] tb:text-[32px] ">
                 Add New Budget
               </p>
@@ -286,12 +246,12 @@ export default function Budgets() {
               <div className="relative w-[200px]">
                 <button
                   onClick={() => setCategoryDropDown(!categoryDropDown)}
-                  className="mb:w-[295px] mb:text-left tb:w-[496px] tb:text-left tb:px-[20px] outline-none appearance-none p-2 pr-8 border border-gray-400 rounded-md bg-white text-black"
+                  className="mb:w-[295px] cursor-pointer mb:text-left tb:w-[496px] tb:text-left tb:px-[20px] outline-none appearance-none p-2 pr-8 border border-gray-400 rounded-md bg-white text-black"
                 >
                   {category}
                 </button>
                 {categoryDropDown && (
-                  <ul className="absolute left-0 mt-2 bg-white border rounded shadow-lg z-10 tb:w-[496px] max-h-40 overflow-y-auto">
+                  <ul className="absolute cursor-pointer left-0 mt-2 bg-white border rounded shadow-lg z-10 tb:w-[496px] max-h-40 overflow-y-auto">
                     <li
                       className="p-2 hover:bg-gray-100"
                       style={{ width: "300px" }}
@@ -345,7 +305,7 @@ export default function Budgets() {
                 <p className="text-[14px] text-[#696868] font-bold">$</p>
                 <input
                   type="number"
-                  className="outline-none"
+                  className="outline-none cursor-pointer"
                   value={maximumSpent}
                   onChange={(e) => setMaximumSpent(Number(e.target.value))}
                 />
@@ -400,7 +360,7 @@ export default function Budgets() {
             </div>
             <button
               onClick={handleAddBudget}
-              className="mt-[20px] tb:w-[496px] py-[16px] w-[295px] bg-[#201F24] rounded-[8px] text-white font-bold text-[14px]"
+              className="mt-[20px] cursor-pointer tb:w-[496px] py-[16px] w-[295px] bg-[#201F24] rounded-[8px] text-white font-bold text-[14px]"
             >
               Add Budget
             </button>
@@ -447,7 +407,7 @@ export default function Budgets() {
               <p className="w-[303px] text-[20px] text-[#201F24] font-bold">
                 Spending Summary
               </p>
-              {finance.budgets.map((item, i) => {
+              {finance.budgets.map((item) => {
                 return (
                   <div
                     key={item.theme}
@@ -601,7 +561,7 @@ export default function Budgets() {
                       <img src={caretRight} alt="caret icon" />
                     </div>
                   </div>
-                  {categoryTransactions.slice(0, 3).map((tran, i) => (
+                  {categoryTransactions.slice(0, 3).map((tran) => (
                     <div key={tran.name + tran.date}>
                       <div className="flex items-center justify-between mt-[20px] gap-[12px]">
                         <div className="category text-[12px] tb:flex tb:items-center tb:gap-[16px] font-bold text-[#201F24] leading-[150%]">

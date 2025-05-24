@@ -42,7 +42,7 @@ export default function Navigation() {
             backgroundColor: currentPath == "/home" ? "#F8F4F0" : "",
             borderBottom: currentPath == "/home" ? "4px solid #277C78" : "",
           }}
-          className="overview w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center "
+          className="overview w-[68.6px] cursor-pointer py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center "
         >
           <img
             src={overview}
@@ -63,7 +63,7 @@ export default function Navigation() {
               currentPath == "/home/transactions" ? "4px solid #277C78" : "",
           }}
           onClick={goTransactions}
-          className="transactions w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
+          className="transactions w-[68.6px] cursor-pointer py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
         >
           <img
             src={transactions}
@@ -83,7 +83,7 @@ export default function Navigation() {
               currentPath == "/home/budget" ? "4px solid #277C78" : "",
           }}
           onClick={goBudget}
-          className="budget w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
+          className="budget w-[68.6px] cursor-pointer py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
         >
           <img
             src={budget}
@@ -103,7 +103,7 @@ export default function Navigation() {
               currentPath == "/home/pots" ? "4px solid #277C78" : "",
           }}
           onClick={goPots}
-          className="pots w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
+          className="pots w-[68.6px] cursor-pointer py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
         >
           <img
             src={pots}
@@ -123,7 +123,7 @@ export default function Navigation() {
               currentPath == "/home/bills" ? "4px solid #277C78" : "",
           }}
           onClick={goBills}
-          className="bills w-[68.6px] py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
+          className="bills w-[68.6px] cursor-pointer py-[8px] px-[22.3px] rounded-t-[8px] flex justify-center"
         >
           <img
             src={bills}
@@ -153,7 +153,7 @@ export default function Navigation() {
             backgroundColor: currentPath == "/home" ? "#F8F4F0" : "",
             borderLeft: currentPath == "/home" ? "4px solid #277C78" : "",
           }}
-          className="overview w-[276px] mt-[64px]  py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
+          className="overview w-[276px] cursor-pointer mt-[64px]  py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
         >
           <img
             src={overview}
@@ -166,7 +166,7 @@ export default function Navigation() {
             }}
           />
           <p
-            className="ml-[16px] text-[16px] font-bold"
+            className="ml-[16px] text-[16px] font-bold hover:text-[#F2F2F2]"
             style={{ color: currentPath == "/home" ? "#201F24" : "#B3B3B3" }}
           >
             Overview
@@ -180,7 +180,7 @@ export default function Navigation() {
               currentPath == "/home/transactions" ? "4px solid #277C78" : "",
           }}
           onClick={goTransactions}
-          className="transactions w-full py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
+          className="transactions w-full cursor-pointer py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
         >
           <img
             src={transactions}
@@ -193,7 +193,7 @@ export default function Navigation() {
             }}
           />
           <p
-            className="ml-[16px] text-[16px] font-bold"
+            className="ml-[16px] text-[16px] font-bold hover:text-[#F2F2F2]"
             style={{
               color:
                 currentPath == "/home/transactions" ? "#201F24" : "#B3B3B3",
@@ -209,7 +209,7 @@ export default function Navigation() {
               currentPath == "/home/budget" ? "4px solid #277C78" : "",
           }}
           onClick={goBudget}
-          className="budget w-full py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
+          className="budget w-full py-[16px] cursor-pointer px-[22.3px] rounded-r-[12px] flex items-center"
         >
           <img
             src={budget}
@@ -222,7 +222,7 @@ export default function Navigation() {
             }}
           />
           <p
-            className="ml-[16px] text-[16px] font-bold"
+            className="ml-[16px] text-[16px] font-bold hover:text-[#F2F2F2]"
             style={{
               color: currentPath == "/home/budget" ? "#201F24" : "#B3B3B3",
             }}
@@ -236,7 +236,7 @@ export default function Navigation() {
             borderLeft: currentPath == "/home/pots" ? "4px solid #277C78" : "",
           }}
           onClick={goPots}
-          className="pots w-full py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
+          className="pots w-full py-[16px] cursor-pointer px-[22.3px] rounded-r-[12px] flex items-center"
         >
           <img
             src={pots}
@@ -249,7 +249,7 @@ export default function Navigation() {
             }}
           />
           <p
-            className="ml-[16px] text-[16px] font-bold"
+            className="ml-[16px] text-[16px] font-bold hover:text-[#F2F2F2]"
             style={{
               color: currentPath == "/home/pots" ? "#201F24" : "#B3B3B3",
             }}
@@ -263,7 +263,7 @@ export default function Navigation() {
             borderLeft: currentPath == "/home/bills" ? "4px solid #277C78" : "",
           }}
           onClick={goBills}
-          className="bills w-full py-[16px] px-[22.3px] rounded-r-[12px] flex items-center"
+          className="bills w-full py-[16px] cursor-pointer px-[22.3px] rounded-r-[12px] flex items-center"
         >
           <img
             src={bills}
@@ -276,7 +276,7 @@ export default function Navigation() {
             }}
           />
           <p
-            className="ml-[16px] text-[16px] font-bold"
+            className="ml-[16px] text-[16px] font-bold hover:text-[#F2F2F2] "
             style={{
               color: currentPath == "/home/bills" ? "#201F24" : "#B3B3B3",
             }}
